@@ -1,6 +1,6 @@
 ; Make a quick note
 
-#n::
+#j::
 InputBox, UserInput, Jot Down, , , 300, 100
 if not ErrorLevel
     FormatTime, Today,, yyyy-MM-dd
