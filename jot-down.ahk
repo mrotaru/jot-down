@@ -1,7 +1,7 @@
 ; Make a quick note
 
-Editor = notepad.exe
-MultiKeyTime = 400
+IniRead, Editor, config.ini, Main, Editor, notepad.exe
+IniRead, MultiKeyTime, config.ini, Main, MultiKeyTime, 400
 
 #j::
 if key_presses > 0 ; SetTimer already started, so we log the keypress instead.
