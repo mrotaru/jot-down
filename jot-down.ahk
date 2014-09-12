@@ -7,8 +7,12 @@ IniRead, Timestamp, config.ini, Main, Timestamp, 0
 IniRead, FileLocation, config.ini, Main, FileLocation, %A_WorkingDir%
 IniRead, FileName, config.ini, Main, FileName, jot-down
 IniRead, FileExtension, config.ini, Main, FileExtension, txt
+IniRead, TriggerHotkey, config.ini, Main, TriggerHotkey, j
 
-#j::
+Hotkey, #%TriggerHotkey%, check
+return
+
+check:
 if key_presses > 0 ; SetTimer already started, so we log the keypress instead.
 {
     key_presses += 1
