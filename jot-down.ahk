@@ -4,6 +4,9 @@ IniRead, Editor, config.ini, Main, Editor, notepad.exe
 IniRead, MultiKeyTime, config.ini, Main, MultiKeyTime, 400
 IniRead, TimestampFormat, config.ini, Main, TimestampFormat, HH:mm
 IniRead, Timestamp, config.ini, Main, Timestamp, 0
+IniRead, FileLocation, config.ini, Main, FileLocation, %A_WorkingDir%
+IniRead, FileName, config.ini, Main, FileName, jot-down
+IniRead, FileExtension, config.ini, Main, FileExtension, txt
 
 #j::
 if key_presses > 0 ; SetTimer already started, so we log the keypress instead.
@@ -18,8 +21,14 @@ return
 
 KeyPress:
 SetTimer, KeyPress, off
-FormatTime, Today,, yyyy-MM-dd
-FileName = %A_WorkingDir%\%Today%.md
+
+if FileNameTimestampFormat {
+    FormatTime, _FileNameTimestampFormat,, yyyy-MM-dd
+    FileNameFull = %FileLocation%\%_FileNameTimestampFormat%.%FileExtension%
+} else {
+    FileNameFull = %FileLocation%\%FileName%.%FileExtension%
+}
+
 if key_presses = 1 ; The key was pressed once.
 {
     InputBox, UserInput, Jot Down, , , 300, 100
@@ -27,9 +36,9 @@ if key_presses = 1 ; The key was pressed once.
     {
         if Timestamp {
             FormatTime, Time,, %TimestampFormat%
-            FileAppend, %Time%: %UserInput% `n, %FileName%
+            FileAppend, %Time%: %UserInput% `n, %FileNameFull%
         } else {
-            FileAppend, %UserInput%`n, %FileName%
+            FileAppend, %UserInput%`n, %FileNameFull%
         }
     }
 }
