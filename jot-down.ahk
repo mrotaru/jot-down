@@ -2,6 +2,7 @@
 
 IniRead, Editor, config.ini, Main, Editor, notepad.exe
 IniRead, MultiKeyTime, config.ini, Main, MultiKeyTime, 400
+IniRead, TimestampFormat, config.ini, Main, TimestampFormat, HH:mm
 
 #j::
 if key_presses > 0 ; SetTimer already started, so we log the keypress instead.
@@ -23,7 +24,7 @@ if key_presses = 1 ; The key was pressed once.
     InputBox, UserInput, Jot Down, , , 300, 100
     if not ErrorLevel
     {
-        FormatTime, Time,, HH:mm
+        FormatTime, Time,, %TimestampFormat%
         FileAppend, %Time%: %UserInput% `n, %FileName%
     }
 }
