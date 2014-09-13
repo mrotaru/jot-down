@@ -2,10 +2,11 @@
 
 IniRead, Editor, config.ini, Main, Editor, notepad.exe
 IniRead, MultiKeyTime, config.ini, Main, MultiKeyTime, 400
-IniRead, TimestampFormat, config.ini, Main, TimestampFormat, HH:mm
 IniRead, Timestamp, config.ini, Main, Timestamp, 0
+IniRead, TimestampFormat, config.ini, Main, TimestampFormat, HH:mm
 IniRead, FileLocation, config.ini, Main, FileLocation, %A_WorkingDir%
 IniRead, FileName, config.ini, Main, FileName, jot-down
+IniRead, FileNameTimestampFormat, config.ini, Main, FileNameTimestampFormat, 0
 IniRead, FileExtension, config.ini, Main, FileExtension, txt
 IniRead, TriggerHotkey, config.ini, Main, TriggerHotkey, j
 
@@ -27,7 +28,7 @@ KeyPress:
 SetTimer, KeyPress, off
 
 if FileNameTimestampFormat {
-    FormatTime, _FileNameTimestampFormat,, yyyy-MM-dd
+    FormatTime, _FileNameTimestampFormat,, %FileNameTimestampFormat%
     FileNameFull = %FileLocation%\%_FileNameTimestampFormat%.%FileExtension%
 } else {
     FileNameFull = %FileLocation%\%FileName%.%FileExtension%
